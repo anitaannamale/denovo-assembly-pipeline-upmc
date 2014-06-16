@@ -95,10 +95,8 @@ def parse_fastx_trimmed_option(config_file):
         if node.getAttribute('name') == "fastx-trimmed":
             
             fastx_min_qual = param_list[0].attributes['min-quality'].value
-            fastx_percent_of_bases = param_list[1].attributes['percent-of-bases'].value
 
-            
-    return fastx_min_qual, fastx_percent_of_bases
+    return fastx_min_qual
 
 #   ASSEMBLY -------------------------------------------------------------------
 

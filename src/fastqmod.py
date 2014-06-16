@@ -203,7 +203,7 @@ A function to trim bad quality reads
 TO USE THIS FUNCTION FASTX TOOLKIT HAS TO BE INSTALLED !
 WEB : http://hannonlab.cshl.edu/fastx_toolkit/index.html    
 """
-def fastx_quality_filter(f, min_qual, percent_of_bases):
+def fastx_quality_filter(f, min_qual):
     
     # Formating input & output files names 
     input_filename = f.name
@@ -211,17 +211,13 @@ def fastx_quality_filter(f, min_qual, percent_of_bases):
     output_filename = filename + ".trimmed" + file_extention
     
     args = ['fastq_quality_trimmer',
-            '-q',
+            '-t',
             min_qual,
-            '-p',
-            percent_of_bases,
             '-i',
             input_filename,
             '-o',
             output_filename]
-    
-    print args
-    
+        
     # Launching command line
     with open("fastx_trimmer.out","wb") as out, open("fastx_trimmer.err","wb") as err:
         

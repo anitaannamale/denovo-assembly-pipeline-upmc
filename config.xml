@@ -17,7 +17,6 @@
         <preprocess name="fastx-trimmed">
             <parameters>
                 <parameter min-quality="28" />
-                <parameter percent-of-bases="80" />
             </parameters>
         </preprocess>
     </preprocesses>

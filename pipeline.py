@@ -154,9 +154,10 @@ if summary_option == "yes":
     
 # Reads Trimming
 config_file.seek(0)
-fastx_min_qual, fastx_percent_of_bases = px.parse_fastx_trimmed_option(config_file)
+fastx_min_qual = px.parse_fastx_trimmed_option(config_file)
 
-fastqmod.fastx_quality_filter(r1, fastx_min_qual, fastx_percent_of_bases)
+fastqmod.fastx_quality_filter(r1, fastx_min_qual)
+fastqmod.fastx_quality_filter(r2, fastx_min_qual)
 
     
 config_file.close()    
