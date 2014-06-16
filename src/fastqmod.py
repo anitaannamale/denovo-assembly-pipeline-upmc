@@ -201,7 +201,9 @@ def decodereadquality(f):
 """
 A function to trim bad quality reads
 TO USE THIS FUNCTION FASTX TOOLKIT HAS TO BE INSTALLED !
-WEB : http://hannonlab.cshl.edu/fastx_toolkit/index.html    
+WEB : http://hannonlab.cshl.edu/fastx_toolkit/index.html
+inputs : opened reads file (f) / minimum quality of bases within reads sequences
+returns the name of the output file generated   
 """
 def fastx_quality_filter(f, min_qual):
     
@@ -216,7 +218,8 @@ def fastx_quality_filter(f, min_qual):
             '-i',
             input_filename,
             '-o',
-            output_filename]
+            output_filename,
+            '-Q33']
         
     # Launching command line
     with open("fastx_trimmer.out","wb") as out, open("fastx_trimmer.err","wb") as err:
@@ -235,5 +238,5 @@ def fastx_quality_filter(f, min_qual):
         except CalledProcessError as e:
             print (e.returncode)
     
-    
+    return output_filename
 
