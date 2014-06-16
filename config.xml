@@ -2,12 +2,17 @@
 
 <configuration>
     
+    <!-- DIRECTORIES SETTINGS -->
+    
     <directories>
         <!-- Path to directory to work into -->
         <directory working-directory="/home/meng/Pipeline_1/my_working_dir/" />
         <!-- Path to directory where reads files are stored -->
         <directory in-file="/home/meng/Pipeline_1/data/" />
     </directories>
+    
+    <!-- PREPROCESSING PARAMETERS -->
+    
     <preprocesses>
         <preprocess name="fastx-trimmed">
             <parameters>
@@ -16,6 +21,9 @@
             </parameters>
         </preprocess>
     </preprocesses>
+    
+    <!-- ASSEMBLY PARAMETERS -->
+    
     <assembly>
         <files>
             <!-- Reads file layout : 2 files -->
@@ -72,4 +80,6 @@
             </program>
         </assembler>
     </assembly>
+    
+    
 </configuration>
