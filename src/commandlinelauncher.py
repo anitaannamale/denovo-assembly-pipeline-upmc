@@ -44,7 +44,7 @@ def launch_command_line(command_line):
     
     # Retrieve splitted args
     args = define_args(command_line)
-    
+        
     # Defining stdout and stderr file names
     if args[0] == "Trinity.pl":
         stdout_name = "stdout_trinity.txt"

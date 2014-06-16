@@ -42,6 +42,7 @@ f = open("filename.fastq","r")
 
 import re
 import os
+import subprocess
 
 #   ILLUMINA QUALITY SCORES ----------------------------------------------------
 # source : http://drive5.com/usearch/manual/quality_score.html
@@ -208,6 +209,35 @@ def fastx_quality_filter(f, min_qual, percent_of_bases):
     input_filename = f.name
     filename, file_extention = os.path.splitext(input_filename)
     output_filename = filename + ".trimmed" + file_extention
+    
+    args = ['fastq_quality_trimmer',
+            '-q',
+            min_qual,
+            '-p',
+            percent_of_bases,
+            '-i',
+            input_filename,
+            '-o',
+            output_filename]
+    
+    print args
+    
+    # Launching command line
+    with open("fastx_trimmer.out","wb") as out, open("fastx_trimmer.err","wb") as err:
+        
+        try:
+            p = subprocess.Popen(args, 
+                                 stdout=out,
+                                 stderr=err)
+            # Waiting for subprocess to terminate
+            p.wait()
+            
+            # If subprocess succefully finished
+            if p.returncode == 0:
+                pass
+            
+        except CalledProcessError as e:
+            print (e.returncode)
     
     
 

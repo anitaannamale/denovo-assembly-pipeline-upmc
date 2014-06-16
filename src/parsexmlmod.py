@@ -86,7 +86,7 @@ def parse_fastx_trimmed_option(config_file):
     # Retrieving assembler XML nodes
     preprocess = xml.getElementsByTagName('preprocess')
     
-    for node in assembler:
+    for node in preprocess:
     
         # Retrieving all parameters
         param_list = node.getElementsByTagName('parameter')

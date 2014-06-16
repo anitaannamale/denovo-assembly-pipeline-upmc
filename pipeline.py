@@ -153,8 +153,10 @@ if summary_option == "yes":
     generate_summary(r1, r2, r1_reads_number, r2_reads_number)
     
 # Reads Trimming
+config_file.seek(0)
 fastx_min_qual, fastx_percent_of_bases = px.parse_fastx_trimmed_option(config_file)
-# fastqmod.fastx_quality_filter(r1, fastx_min_qual, fastx_percent_of_bases)
+
+fastqmod.fastx_quality_filter(r1, fastx_min_qual, fastx_percent_of_bases)
 
     
 config_file.close()    
