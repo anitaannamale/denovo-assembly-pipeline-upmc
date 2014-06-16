@@ -1,0 +1,75 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
+
+<configuration>
+    
+    <directories>
+        <!-- Path to directory to work into -->
+        <directory working-directory="/home/meng/Pipeline/my_working_dir/" />
+        <!-- Path to directory where reads files are stored -->
+        <directory in-file="/home/meng/Pipeline/data/" />
+    </directories>
+    <preprocesses>
+        <preprocess name="fastx-trimmed">
+            <parameters>
+                <parameter min-quality="28" />
+                <parameter percent-of-bases="80" />
+            </parameters>
+        </preprocess>
+    </preprocesses>
+    <assembly>
+        <files>
+            <!-- Reads file layout : 2 files -->
+            <file left="R1.fq" />
+            <file right="R2.fq" />
+        </files>
+        <assembler name="trinity">
+            <parameters>
+                <!-- Reads file format : "fq" "fa" -->
+                <parameter file-format="fq" />
+                <!-- Maximum RAM allowed (Jellyfish) -->
+                <parameter max-ram="15" />
+                <!-- Maximum CPU allowed (Chrysalis/Butterfly) -->
+                <parameter max-cpu="10" />
+                <!-- Output directory name -->
+                <parameter output="TRINOUT" />
+                <!-- Reads orientation : "RF" "FR" "R" "F" -->
+                <parameter orientation="RF" />
+            </parameters>
+        </assembler>
+        <assembler name="velvet-oases">
+            <program name="velveth">
+                <parameters>
+                    <!-- Reads file format : "-fastq" "-fasta" "-fmtAuto" 
+                    If you're not sure about the format use "-fmtAuto" -->
+                    <parameter file-format="-fastq" />
+                    <!-- Reads type : "-shortPaired" "-longPaired" -->
+                    <parameter read-type="-shortPaired" />
+                    <!-- Reads file layout : "-separate" "-interleaved" -->
+                    <parameter file-layout="-separate" />
+                    <!-- Reads orientation (if known) : "-strand-specific" -->
+                    <parameter orientation="" />
+                </parameters>
+            </program>
+            <program name="oases">
+                <parameters>
+                    <!-- Paired reads insert length -->
+                    <parameter insert-length="200" />
+                    <!-- Minimum node coverage allowed (reads)-->
+                    <parameter node-coverage="3" />
+                </parameters>
+            </program>
+            <program name="oases-pipeline">
+                <parameters>
+                    <!-- Start K value for k-mer -->
+                    <parameter min-k="19" />
+                    <!-- End K value for k-mer -->
+                    <parameter max-k="31" />
+                    <!-- Step between K value for k-mer -->
+                    <parameter step-k="2" />
+                    <!-- Output directory name -->
+                    <parameter output="OASOUT" />
+                </parameters>
+            </program>
+        </assembler>
+    </assembly>
+</configuration>
