@@ -3,7 +3,7 @@
 
 # Functions --------------------------------------------------------------------
 
-# This function uses date to generate unique commit name each minute
+# This function uses date to generate unique commit name each second
 function generate_commit_name
 {
     commit_name=$(date '+%d%m%Y-%X')
