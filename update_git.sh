@@ -1,12 +1,16 @@
 #!/bin/bash
 # Author : Arnaud MENG
 
+# Functions --------------------------------------------------------------------
+
 # This function uses date to generate unique commit name each minute
 function generate_commit_name
 {
     commit_name=$(date '+%d%m%Y-%X')
     echo $commit_name
 }
+
+# Definitions and working path setting -----------------------------------------
 
 # Defining local project directory 
 local_repository="/home/meng/Pipeline"
