@@ -1,5 +1,7 @@
 #!/bin/bash
+# Author : Arnaud MENG
 
+# This function uses date to generate unique commit name each minute
 function generate_commit_name
 {
     commit_name=$(date '+%d%m%Y-%X')
@@ -21,16 +23,21 @@ update_git_script="update_git.sh"
 # Move to $local_repository location
 cd $local_repository
 
-# Launching Git commands to update remote repository
+# Launching Git commands to update remote repository ---------------------------
+
+# Adding files to be update
 eval "git add $config_file"
 eval "git add $pipeline_script"
 eval "git add $modules_directory"
 eval "git add $update_git_script"
 
+# Setting remote URL repository
 eval "git remote set-url origin $remote_repository"
 
+# Generating commit unique name
 commitname=$(generate_commit_name)
 eval  "git commit -m '$commitname'"
 
+# Updating remote repository
 eval "git push origin master"
 
