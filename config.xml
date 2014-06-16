@@ -4,9 +4,9 @@
     
     <directories>
         <!-- Path to directory to work into -->
-        <directory working-directory="/home/meng/Pipeline/my_working_dir/" />
+        <directory working-directory="/home/meng/Pipeline_1/my_working_dir/" />
         <!-- Path to directory where reads files are stored -->
-        <directory in-file="/home/meng/Pipeline/data/" />
+        <directory in-file="/home/meng/Pipeline_1/data/" />
     </directories>
     <preprocesses>
         <preprocess name="fastx-trimmed">
