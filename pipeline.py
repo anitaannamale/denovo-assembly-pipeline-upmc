@@ -23,8 +23,6 @@ A Python utility to proceed de novo transcriptomic assembly and analysis
 
 #   IMPORTS --------------------------------------------------------------------
 
-# testetsttshjfzekfbzkjfblkzabf
-
 import os, sys
 import datetime
 import time
