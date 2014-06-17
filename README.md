@@ -25,6 +25,7 @@ Installs
 ### Trinity
 ### Velvet
 * Download : http://www.ebi.ac.uk/~zerbino/velvet/velvet_latest.tgz
+* Installation command lines
 ```sh
 cd <tgz_location>
 tar -zxvf velvet_latest.tgz
