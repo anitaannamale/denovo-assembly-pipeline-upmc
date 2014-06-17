@@ -13,7 +13,7 @@ Arnaud MENG M2BI (Paris 7 Diderot)
 
 = DESCRIPTION
 
-A Python utility to proceed de novo transcriptomic assembly and analysis
+A Python utility to proceed de novo transcriptomic assembly and analysis.
 
 = DATE
 
