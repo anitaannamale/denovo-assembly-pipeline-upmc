@@ -60,7 +60,7 @@ make
 ```sh
 echo 'export PATH=$PATH:~/path_to_Trinity_folder/trinityrnaseq_r20131110' >> ~/.bashrc
 ```
-* _More compilation informations_ : https://www.ebi.ac.uk/~zerbino/oases/OasesManual.pdf
+* _More compilation informations_ : http://trinityrnaseq.sourceforge.net/#installation
 
 ### Velvet
 
