@@ -35,7 +35,7 @@ make
 ```
 * Add to $PATH : 
 ```sh
-echo 'export PATH=$PATH:/home/meng/Assembleurs/velvet_1.2.10' >> /home/meng/.bashrc
+echo 'export PATH=$PATH:/home/meng/Assembleurs/velvet_1.2.10' >> ~/.bashrc
 ```
 * _More compilation informations_ : https://www.ebi.ac.uk/~zerbino/velvet/Manual.pdf
 
