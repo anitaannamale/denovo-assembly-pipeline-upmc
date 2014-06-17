@@ -31,6 +31,9 @@ tar -zxvf velvet_latest.tgz
 cd <velvet_directory>
 make 
 ```
+
+_More compilation informations_ : https://www.ebi.ac.uk/~zerbino/velvet/Manual.pdf
+
 ### Oases
 ### Fastx-toolkit
 Installed via Synaptic
