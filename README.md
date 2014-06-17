@@ -102,6 +102,8 @@ echo 'export PATH=$PATH:~/path_to_Oases_folder/oases_0.2.8' >> ~/.bashrc
 ### Fastx-toolkit
 Installed via Synaptic
 
+### Trimmomatic
+Installed via Synaptic
 
 Run
 --------------
@@ -129,3 +131,4 @@ python pipeline.py
 [Velvet]:http://www.ebi.ac.uk/~zerbino/velvet/
 [Oases]:https://www.ebi.ac.uk/~zerbino/oases/
 [Fastx-toolkit]:http://hannonlab.cshl.edu/fastx_toolkit/
+[Trimmomatic]:http://www.usadellab.org/cms/?page=trimmomatic
