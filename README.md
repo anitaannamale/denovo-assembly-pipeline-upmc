@@ -22,8 +22,13 @@ upmc-denovo-assembly-pipeline uses a number of open source projects to work prop
 * [Bowtie] - An ultrafast, memory-efficient short read aligner.
 * [SAMTools] - Provides various tools for manipulating alignments in the SAM/BAM format.
 
+* [Python] - A widely used general-purpose, high-level programming language
+
 Installs
 --------------
+### Python 3.0 
+
+
 ### Trinity
 
 * Trinity prerequisites : 
@@ -115,6 +120,7 @@ python pipeline.py
 
 **Free Software, Hell Yeah!**
 
+[Python]:https://www.python.org/
 [Java]:http://www.java.com/fr/
 [Bowtie]:http://bowtie-bio.sourceforge.net/index.shtml
 [Bowtie2]:http://bowtie-bio.sourceforge.net/index.shtml
