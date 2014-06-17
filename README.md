@@ -58,7 +58,7 @@ make
 
 * Add to $PATH : 
 ```sh
-echo 'export PATH=$PATH:~/path_to_directory/oases_0.2.8' >> ~/.bashrc
+echo 'export PATH=$PATH:~/path_to_Trinity_folder/trinityrnaseq_r20131110' >> ~/.bashrc
 ```
 * _More compilation informations_ : https://www.ebi.ac.uk/~zerbino/oases/OasesManual.pdf
 
@@ -74,7 +74,7 @@ make
 ```
 * Add to $PATH : 
 ```sh
-echo 'export PATH=$PATH:~/path_to_directory/velvet_1.2.10' >> ~/.bashrc
+echo 'export PATH=$PATH:~/path_to_Velvet_folder/velvet_1.2.10' >> ~/.bashrc
 ```
 * _More compilation informations_ : https://www.ebi.ac.uk/~zerbino/velvet/Manual.pdf
 
@@ -90,7 +90,7 @@ make
 ```
 * Add to $PATH : 
 ```sh
-echo 'export PATH=$PATH:~/path_to_directory/oases_0.2.8' >> ~/.bashrc
+echo 'export PATH=$PATH:~/path_to_Oases_folder/oases_0.2.8' >> ~/.bashrc
 ```
 * _More compilation informations_ : https://www.ebi.ac.uk/~zerbino/oases/OasesManual.pdf
 
