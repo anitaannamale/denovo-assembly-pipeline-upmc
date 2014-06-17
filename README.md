@@ -54,12 +54,10 @@ cd <trinityrnaseq_r20131110 location>
 make 
 ```
 * Configure Trinity :
-
 1. Open Trinity.pl script in Gedit
 2. Find (Ctrl+F) 'my $CPU_MAX='
 3. Change $CPU_MAX value to maximum CPU number
 4. Save changes
-
 * Add to $PATH : 
 ```sh
 echo 'export PATH=$PATH:~/path_to_Trinity_folder/trinityrnaseq_r20131110' >> ~/.bashrc
