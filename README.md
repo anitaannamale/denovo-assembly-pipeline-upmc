@@ -26,7 +26,7 @@ Installs
 ### Velvet
 * Download : http://www.ebi.ac.uk/~zerbino/velvet/velvet_latest.tgz
 ```sh
-cd tgz_location
+cd <tgz_location>
 tar -zxvf velvet_latest.tgz
 ```
 ### Oases
