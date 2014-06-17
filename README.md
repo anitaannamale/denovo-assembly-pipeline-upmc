@@ -28,6 +28,8 @@ Installs
 ```sh
 cd <tgz_location>
 tar -zxvf velvet_latest.tgz
+cd velvet_1.2.10
+
 ```
 ### Oases
 ### Fastx-toolkit
