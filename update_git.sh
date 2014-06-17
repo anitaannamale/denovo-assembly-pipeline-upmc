@@ -23,7 +23,7 @@ config_file="config.xml"
 pipeline_script="pipeline.py"
 modules_directory="./src"
 update_git_script="update_git.sh"
-readme_git="README.git"
+readme_git="README.md"
 
 # Move to $local_repository location
 cd $local_repository

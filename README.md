@@ -1,7 +1,7 @@
 upmc-denovo-assembly-pipeline
 =============================
 
-This pipeline is a tool to proceed de novo transcriptome assembly and few analysis.
+This pipeline is a tool to proceed de novo transcriptome assembly and few analysis. TEST
 
 /!\ This current version IS NOT fonctional for the moment !
 
