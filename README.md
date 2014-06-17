@@ -94,7 +94,7 @@ echo 'export PATH=$PATH:~/path_to_Oases_folder/oases_0.2.8' >> ~/.bashrc
 ```
 * _More compilation informations_ : https://www.ebi.ac.uk/~zerbino/oases/OasesManual.pdf
 
-### [Fastx-toolkit]
+### Fastx-toolkit
 Installed via Synaptic
 
 
