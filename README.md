@@ -31,10 +31,10 @@ cd <trinityrnaseq_r20131110 location>
 make 
 ```
 * Configure Trinity : 
-_Open Trinity.pl script in Gedit_
-_Find (Ctrl+F) 'my $CPU_MAX='_
-_Change $CPU_MAX value to maximum CPU number_
-_Save_
+Open Trinity.pl script in Gedit
+Find (Ctrl+F) 'my $CPU_MAX='
+Change $CPU_MAX value to maximum CPU number
+Save
 * Add to $PATH : 
 ```sh
 echo 'export PATH=$PATH:~/path_to_directory/oases_0.2.8' >> ~/.bashrc
