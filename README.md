@@ -27,6 +27,7 @@ Installs
 --------------
 ### Python 3.0 
 
+Installed via Synaptic
 
 ### Trinity
 
