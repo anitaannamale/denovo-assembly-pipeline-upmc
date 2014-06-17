@@ -23,6 +23,7 @@ config_file="config.xml"
 pipeline_script="pipeline.py"
 modules_directory="./src"
 update_git_script="update_git.sh"
+readme_git="README.git"
 
 # Move to $local_repository location
 cd $local_repository
@@ -34,6 +35,7 @@ eval "git add $config_file"
 eval "git add $pipeline_script"
 eval "git add $modules_directory"
 eval "git add $update_git_script"
+eval "git add $readme_git"
 
 # Setting remote URL repository
 eval "git remote set-url origin $remote_repository"
