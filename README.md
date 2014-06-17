@@ -27,17 +27,10 @@ Installs
 * Download : http://www.ebi.ac.uk/~zerbino/velvet/velvet_latest.tgz
 ```sh
 cd <tgz_location>
-```
-```sh
 tar -zxvf velvet_latest.tgz
-```
-```sh
 cd <velvet_directory>
+make 
 ```
-```sh
-make
-``` 
-
 ### Oases
 ### Fastx-toolkit
 Installed via Synaptic
