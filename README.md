@@ -32,7 +32,7 @@ cd <velvet_latest_directory>
 make 
 ```
 
-_More compilation informations_ : https://www.ebi.ac.uk/~zerbino/velvet/Manual.pdf
+* _More compilation informations_ : https://www.ebi.ac.uk/~zerbino/velvet/Manual.pdf
 
 ### Oases
 ### Fastx-toolkit
