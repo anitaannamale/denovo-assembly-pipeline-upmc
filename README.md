@@ -28,9 +28,9 @@ Installs
 * Download : http://www.ebi.ac.uk/~zerbino/velvet/velvet_latest.tgz
 * Installation command lines : 
 ```sh
-cd <tgz_location>
+cd <"velvet_latest.tgz" location>
 tar -zxvf velvet_latest.tgz
-cd <velvet_latest_directory>
+cd velvet_1.2.10
 make
 ```
 * Add to $PATH : 
