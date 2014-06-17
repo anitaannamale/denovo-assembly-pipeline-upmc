@@ -21,7 +21,6 @@ upmc-denovo-assembly-pipeline uses a number of open source projects to work prop
 * [Fastx-toolkit] - A set of tools for FASTQ files treatment.
 * [Bowtie] - An ultrafast, memory-efficient short read aligner.
 * [SAMTools] - Provides various tools for manipulating alignments in the SAM/BAM format.
-
 * [Python] - A widely used general-purpose, high-level programming language
 
 Installs
