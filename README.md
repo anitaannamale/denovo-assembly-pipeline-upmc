@@ -26,7 +26,7 @@ Installs
 
 * Trinity prerequisites : 
 
-##### Java
+##### [Java]
 ```sh
 sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
@@ -113,6 +113,7 @@ python pipeline.py
 
 **Free Software, Hell Yeah!**
 
+[Java]:http://www.java.com/fr/
 [Trinity]:http://trinityrnaseq.sourceforge.net/
 [Velvet]:http://www.ebi.ac.uk/~zerbino/velvet/
 [Oases]:https://www.ebi.ac.uk/~zerbino/oases/
