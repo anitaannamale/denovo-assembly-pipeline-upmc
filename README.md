@@ -46,12 +46,12 @@ echo 'export PATH=$PATH:~/path_to_directory/velvet_1.2.10' >> ~/.bashrc
 ```sh
 cd <tgz_location>
 tar -zxvf oases_latest.tgz
-cd <oases_latest_directory>
+cd oases_oases_0.2.8
 make 
 ```
 * Add to $PATH : 
 ```sh
-echo 'export PATH=$PATH:~/path_to_directory/velvet_1.2.10' >> ~/.bashrc
+echo 'export PATH=$PATH:~/path_to_directory/oases_0.2.8' >> ~/.bashrc
 ```
 * _More compilation informations_ : https://www.ebi.ac.uk/~zerbino/oases/OasesManual.pdf
 
