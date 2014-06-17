@@ -26,16 +26,16 @@ Installs
 
 * Trinity prerequisites : 
 
-Java
+**Java**
 ```sh
 sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java7-installer
 ```
-Bowtie & Bowtie2
+**Bowtie & Bowtie2**
 Installed via Synaptic
 
-SAMTools
+**SAMTools**
 Installed via Synaptic
 
 
