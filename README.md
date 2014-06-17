@@ -25,7 +25,7 @@ Installs
 ### Trinity
 ### Velvet
 * Download : http://www.ebi.ac.uk/~zerbino/velvet/velvet_latest.tgz
-* ```sh
+```sh
 cd pipeline.py
 ```
 ### Oases
