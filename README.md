@@ -32,7 +32,7 @@ sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java7-installer
 ```
-##### Bowtie & Bowtie2
+##### [Bowtie] & [Bowtie2]
 
 Installed via Synaptic
 
@@ -114,6 +114,8 @@ python pipeline.py
 **Free Software, Hell Yeah!**
 
 [Java]:http://www.java.com/fr/
+[Bowtie]:http://bowtie-bio.sourceforge.net/index.shtml
+[Bowtie2]:http://bowtie-bio.sourceforge.net/index.shtml
 [Trinity]:http://trinityrnaseq.sourceforge.net/
 [Velvet]:http://www.ebi.ac.uk/~zerbino/velvet/
 [Oases]:https://www.ebi.ac.uk/~zerbino/oases/
