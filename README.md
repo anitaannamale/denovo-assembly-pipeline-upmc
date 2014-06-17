@@ -36,7 +36,7 @@ sudo apt-get install oracle-java7-installer
 
 Installed via Synaptic
 
-##### SAMTools
+##### [SAMTools]
 
 Installed via Synaptic
 
@@ -116,6 +116,7 @@ python pipeline.py
 [Java]:http://www.java.com/fr/
 [Bowtie]:http://bowtie-bio.sourceforge.net/index.shtml
 [Bowtie2]:http://bowtie-bio.sourceforge.net/index.shtml
+[SAMTools]:http://samtools.sourceforge.net/
 [Trinity]:http://trinityrnaseq.sourceforge.net/
 [Velvet]:http://www.ebi.ac.uk/~zerbino/velvet/
 [Oases]:https://www.ebi.ac.uk/~zerbino/oases/
