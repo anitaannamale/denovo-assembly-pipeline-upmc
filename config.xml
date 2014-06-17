@@ -14,8 +14,10 @@
     <!-- PREPROCESSING PARAMETERS -->
     
     <preprocesses>
+        <!-- Fastx quality trimmer programm -->
         <preprocess name="fastx-trimmed">
             <parameters>
+                <!-- Minimum quality of bases required within each sequence -->
                 <parameter min-quality="28" />
             </parameters>
         </preprocess>

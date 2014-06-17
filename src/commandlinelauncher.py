@@ -69,5 +69,3 @@ def launch_command_line(command_line):
             
         except CalledProcessError as e:
             print (e.returncode)
-
-
