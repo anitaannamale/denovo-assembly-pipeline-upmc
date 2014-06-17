@@ -24,7 +24,7 @@ Installs
 --------------
 ### Trinity
 
-* Trinity prerequisite : 
+* Trinity prerequisites : 
 
 1. Java
 ```sh
@@ -32,8 +32,14 @@ sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java7-installer
 ```
+2. Bowtie & Bowtie2
+Installed via Synaptic
 
-* Download : https://sourceforge.net/projects/trinityrnaseq/files/
+3. SAMTools
+Installed via Synaptic
+
+
+* Download Trinity : https://sourceforge.net/projects/trinityrnaseq/files/
 * Installation command lines : 
 ```sh
 cd <trinityrnaseq_r20131110 location>
