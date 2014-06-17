@@ -32,10 +32,10 @@ make
 ```
 * Configure Trinity :
 
-1. _Open Trinity.pl script in Gedit_
-2. _Find (Ctrl+F) 'my $CPU_MAX='_
-3. _Change $CPU_MAX value to maximum CPU number_
-4. _Save_
+1. Open Trinity.pl script in Gedit
+2. Find (Ctrl+F) 'my $CPU_MAX='
+3. Change $CPU_MAX value to maximum CPU number
+4. Save
 
 * Add to $PATH : 
 ```sh
