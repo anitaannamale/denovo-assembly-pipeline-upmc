@@ -19,6 +19,8 @@ upmc-denovo-assembly-pipeline uses a number of open source projects to work prop
 * [Velvet] - A de novo genome assembly program.
 * [Oases] - A Velvet extention for de novo transcriptome assembly.
 * [Fastx-toolkit] - A set of tools for FASTQ files treatment.
+* [Bowtie] - An ultrafast, memory-efficient short read aligner.
+* [SAMTools] - Provides various tools for manipulating alignments in the SAM/BAM format.
 
 Installs
 --------------
