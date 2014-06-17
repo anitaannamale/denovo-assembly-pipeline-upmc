@@ -44,7 +44,7 @@ echo 'export PATH=$PATH:~/path_to_directory/velvet_1.2.10' >> ~/.bashrc
 * Download : http://www.ebi.ac.uk/~zerbino/oases/oases_latest.tgz 
 * Installation command lines : 
 ```sh
-cd <tgz_location>
+cd <oases_latest.tgz location>
 tar -zxvf oases_latest.tgz
 cd oases_oases_0.2.8
 make 
