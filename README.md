@@ -18,7 +18,15 @@ upmc-denovo-assembly-pipeline uses a number of open source projects to work prop
 * [Trinity] - A de novo transcriptome assembly program.
 * [Velvet] - A de novo genome assembly program.
 * [Oases] - A Velvet extention for de novo transcriptome assembly.
-* [Fastx-Toolkit] - A set of tools for FASTQ files treatment.
+* [Fastx-toolkit] - A set of tools for FASTQ files treatment.
+
+Installs
+--------------
+### Trinity
+### Velvet
+### Oases
+### Fastx-toolkit
+
 
 Run
 --------------
@@ -40,4 +48,4 @@ python pipeline.py
 [Trinity]:http://trinityrnaseq.sourceforge.net/
 [Velvet]:http://www.ebi.ac.uk/~zerbino/velvet/
 [Oases]:https://www.ebi.ac.uk/~zerbino/oases/
-[Fastx-Toolkit]:http://hannonlab.cshl.edu/fastx_toolkit/
+[Fastx-toolkit]:http://hannonlab.cshl.edu/fastx_toolkit/
