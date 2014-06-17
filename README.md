@@ -26,6 +26,7 @@ Installs
 ### Velvet
 ### Oases
 ### Fastx-toolkit
+Installed via Synaptic
 
 
 Run
