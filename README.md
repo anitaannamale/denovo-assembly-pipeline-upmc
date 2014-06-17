@@ -49,8 +49,11 @@ tar -zxvf oases_latest.tgz
 cd <oases_latest_directory>
 make 
 ```
-
-* _More compilation informations_ : https://www.ebi.ac.uk/~zerbino/velvet/Manual.pdf
+* Add to $PATH : 
+```sh
+echo 'export PATH=$PATH:~/path_to_directory/velvet_1.2.10' >> ~/.bashrc
+```
+* _More compilation informations_ : https://www.ebi.ac.uk/~zerbino/oases/OasesManual.pdf
 
 ### Fastx-toolkit
 Installed via Synaptic
