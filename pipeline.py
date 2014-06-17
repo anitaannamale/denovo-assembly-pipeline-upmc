@@ -147,11 +147,19 @@ config_file.seek(0)
 fastx_min_qual = px.parse_fastx_trimmed_option(config_file)
 
 reads_file_1 = fastqmod.fastx_quality_filter(r1, fastx_min_qual)
-reads_file_1 = fastqmod.fastx_quality_filter(r2, fastx_min_qual)
+reads_file_2 = fastqmod.fastx_quality_filter(r2, fastx_min_qual)
 
 # Counting reads number
 r1_reads_number = fastqmod.readcount(r1)
 r2_reads_number = fastqmod.readcount(r2)
+
+# Closing no trimmed reads files
+r1.close()
+r2.close()
+
+# Loading trimmed reads files
+r1 = open(reads_file_1,"r")
+r2 = open(reads_file_2,"r")
 
 # Summary option 
 summary_option = args.datasummary
@@ -159,9 +167,9 @@ if summary_option == "yes":
     print "[" + str(round(time.time()-start_time)) + "sec] Summaring"
     generate_summary(r1, r2, r1_reads_number, r2_reads_number)
     
-
+# Closing XML configuration files
 config_file.close()    
-    
+
 #   CHECKING COMPUTING RESSOURCES ----------------------------------------------
 
 print "[" + str(round(time.time()-start_time)) + "sec] Checking computing ressources"    
