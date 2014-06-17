@@ -26,7 +26,7 @@ Installs
 
 * Trinity prerequisites : 
 
-**Java**
+#### Java
 ```sh
 sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
