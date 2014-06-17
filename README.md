@@ -23,6 +23,24 @@ upmc-denovo-assembly-pipeline uses a number of open source projects to work prop
 Installs
 --------------
 ### Trinity
+
+* Download : https://sourceforge.net/projects/trinityrnaseq/files/
+* Installation command lines : 
+```sh
+cd <trinityrnaseq_r20131110 location>
+make 
+```
+* Configure Trinity : 
+1. Open Trinity.pl script in Gedit
+2. Find (Ctrl+F) 'my $CPU_MAX='
+3. Change $CPU_MAX value to maximum CPU number
+4. Save
+* Add to $PATH : 
+```sh
+echo 'export PATH=$PATH:~/path_to_directory/oases_0.2.8' >> ~/.bashrc
+```
+* _More compilation informations_ : https://www.ebi.ac.uk/~zerbino/oases/OasesManual.pdf
+
 ### Velvet
 
 * Download : http://www.ebi.ac.uk/~zerbino/velvet/velvet_latest.tgz
