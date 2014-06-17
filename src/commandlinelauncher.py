@@ -38,7 +38,7 @@ def define_args(command_line):
     return shlex.split(command_line)
 
 """
-Function to ???
+Function to launch command line 
 """    
 def launch_command_line(command_line):
     
@@ -52,6 +52,9 @@ def launch_command_line(command_line):
     elif args[0] == "oases_pipeline.py":
         stdout_name = "stdout_vo.txt"
         stderr_name = "stderr_vo.txt"
+    else:
+        stdout_name = "stdout.txt"
+        stderr_name = "stderr.txt"
     
     # Launching command line
     with open(stdout_name,"wb") as out, open(stderr_name,"wb") as err:
