@@ -34,7 +34,7 @@ make
 
 1. Open Trinity.pl script in Gedit
 2. Find (Ctrl+F) 'my $CPU_MAX='
-3. Change $CPU_MAX value to maximum CPU number
+3. Change $CPU_MAX value to maximum CPU number.
 4. Save
 
 * Add to $PATH : 
