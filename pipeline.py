@@ -198,6 +198,11 @@ if expected_amount_of_ram_needed > int(amount_of_ram["free"])/1000000:
               ") exceeds free amount of RAM available (" +\
               amount_of_ram["free"] + ")")
 
+
+# Closing trimmed reads files
+r1.close()
+r2.close()
+
 #   COMMAND LINE GENERATION ----------------------------------------------------
 
 print "[" + str(round(time.time()-start_time)) + "sec] Generating command lines"
