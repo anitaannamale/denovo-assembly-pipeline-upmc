@@ -22,6 +22,7 @@ upmc-denovo-assembly-pipeline uses a number of open source projects to work prop
 * [Bowtie] - An ultrafast, memory-efficient short read aligner.
 * [SAMTools] - Provides various tools for manipulating alignments in the SAM/BAM format.
 * [Python] - A widely used general-purpose, high-level programming language
+* [Trimmomatic] - A fast, multithreaded command line tool that can be used to trim and crop Illumina (FASTQ) data as well as to remove adapters. 
 
 Installs
 --------------
