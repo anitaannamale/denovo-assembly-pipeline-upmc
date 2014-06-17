@@ -24,18 +24,34 @@ Installs
 --------------
 ### Trinity
 ### Velvet
+
 * Download : http://www.ebi.ac.uk/~zerbino/velvet/velvet_latest.tgz
 * Installation command lines : 
 ```sh
 cd <tgz_location>
 tar -zxvf velvet_latest.tgz
 cd <velvet_latest_directory>
+make
+```
+* Add to $PATH : 
+```sh
+echo 'export PATH=$PATH:/home/meng/Assembleurs/velvet_1.2.10' >> /home/meng/.bashrc
+```
+* _More compilation informations_ : https://www.ebi.ac.uk/~zerbino/velvet/Manual.pdf
+
+### Oases
+
+* Download : http://www.ebi.ac.uk/~zerbino/oases/oases_latest.tgz 
+* Installation command lines : 
+```sh
+cd <tgz_location>
+tar -zxvf oases_latest.tgz
+cd <oases_latest_directory>
 make 
 ```
 
 * _More compilation informations_ : https://www.ebi.ac.uk/~zerbino/velvet/Manual.pdf
 
-### Oases
 ### Fastx-toolkit
 Installed via Synaptic
 
