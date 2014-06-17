@@ -33,8 +33,11 @@ make
 * Configure Trinity :
 
 Open Trinity.pl script in Gedit
+
 Find (Ctrl+F) 'my $CPU_MAX='
+
 Change $CPU_MAX value to maximum CPU number
+
 Save
 
 * Add to $PATH : 
