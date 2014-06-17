@@ -28,7 +28,7 @@ Installs
 ```sh
 cd <tgz_location>
 tar -zxvf velvet_latest.tgz
-cd <velvet_directory>
+cd <velvet_latest_directory>
 make 
 ```
 
