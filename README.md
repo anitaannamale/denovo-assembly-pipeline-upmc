@@ -33,9 +33,11 @@ sudo apt-get update
 sudo apt-get install oracle-java7-installer
 ```
 **Bowtie & Bowtie2**
+
 Installed via Synaptic
 
 **SAMTools**
+
 Installed via Synaptic
 
 
