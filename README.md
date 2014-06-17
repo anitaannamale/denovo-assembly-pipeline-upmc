@@ -24,6 +24,15 @@ Installs
 --------------
 ### Trinity
 
+* Trinity prerequisite : 
+
+1. Java
+```sh
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java7-installer
+```
+
 * Download : https://sourceforge.net/projects/trinityrnaseq/files/
 * Installation command lines : 
 ```sh
