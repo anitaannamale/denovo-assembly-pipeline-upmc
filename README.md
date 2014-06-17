@@ -32,7 +32,7 @@ make
 ```
 * Configure Trinity :
 
-_Open Trinity.pl script in Gedit_
+1. _Open Trinity.pl script in Gedit_
 
 _Find (Ctrl+F) 'my $CPU_MAX='_
 
