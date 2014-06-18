@@ -29,8 +29,8 @@
         
         <files>
             <!-- Reads file layout : 2 files -->
-            <file left="reads.ALL.left.fq" />
-            <file right="reads.ALL.right.fq" />
+            <file left="R1.fq" />
+            <file right="R2.fq" />
         </files>
         
         <assembler name="trinity">

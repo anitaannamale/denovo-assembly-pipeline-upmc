@@ -27,6 +27,7 @@ import os, sys
 import datetime
 import time
 import argparse
+from xml.etree.ElementTree import ElementTree
 
 # Add /src/ directory to Python path | Edit if needed
 sys.path.append("/home/meng/Pipeline/src")
@@ -87,7 +88,6 @@ parser.add_argument('--datasummary',
 
 args=parser.parse_args()
 
-
 # Execution starts
 start_time = time.time()
 
@@ -97,13 +97,29 @@ print "[" + str(round(time.time()-start_time)) + "sec] Loading XML config file"
 
 config_file = open("config.xml","r")
 
+# Creating Element tree to be parse & parse it
+tree = ElementTree()
+tree.parse(config_file)
+
 #   CONFIG FILE PARSING --------------------------------------------------------
 
 print "[" + str(round(time.time()-start_time)) + "sec] Parsing directories parameters"
 
-# Working directory
+"""
+If you don't want to use ElementTree version of parsing functions, don't forget 
+to rewind config_file : 
+
+config_file = open("config.xml","r")
+
+parsing_function(config_file)
 config_file.seek(0)
-working_directory = px.parse_working_directory(config_file)
+parsing_function(config_file)
+...
+
+"""
+
+# Working directory
+working_directory = px.parse_working_directory_ET(tree)
 
 # Setting working directoty
 if not os.path.exists(working_directory):
@@ -113,26 +129,22 @@ if not os.path.exists(working_directory):
 os.chdir(working_directory)
     
 # Infile data directory
-config_file.seek(0)
-data_directory = px.parse_data_directory(config_file)
+data_directory = px.parse_data_directory_ET(tree)
 
 print "[" + str(round(time.time()-start_time)) + "sec] Parsing assemblers parameters"
 
 # Reads files names
-config_file.seek(0)
-reads_file_1, reads_file_2 = px.parse_reads_files_names(config_file)
+reads_file_1, reads_file_2 = px.parse_reads_files_names_ET(tree)
 
 # Adding path to reads files names
 reads_file_1 = data_directory + reads_file_1
 reads_file_2 = data_directory + reads_file_2
 
 # Trinity parameters
-config_file.seek(0)
-trinity_params = px.parse_trinity_parameters(config_file)
+trinity_params = px.parse_trinity_parameters_ET(tree)
 
 # Velvet/Oases parameters
-config_file.seek(0)
-vo_params = px.parse_vo_parameters(config_file)
+vo_params = px.parse_vo_parameters_ET(tree)
 
 #   PREPROCESSING READS FILES --------------------------------------------------
 
@@ -143,8 +155,7 @@ r1 = open(reads_file_1,"r")
 r2 = open(reads_file_2,"r")
 
 # Reads Trimming
-config_file.seek(0)
-fastx_min_qual = px.parse_fastx_trimmed_option(config_file)
+fastx_min_qual = px.parse_fastx_trimmed_option_ET(tree)
 
 reads_file_1 = fastqmod.fastx_quality_filter(r1, fastx_min_qual)
 reads_file_2 = fastqmod.fastx_quality_filter(r2, fastx_min_qual)

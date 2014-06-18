@@ -19,17 +19,12 @@ A Python module for XML file parsing
 
 06/2014
 
-= FUNCTIONS
-
-parse_reads_files_names(config_file)
-parse_trinity_parameters(config_file)
-parse_vo_parameters(config_file)
-
 """
 
 #   IMPORTS --------------------------------------------------------------------
 
 from xml.dom import minidom
+from xml.etree.ElementTree import ElementTree
 
 #   DIRECTORIES ----------------------------------------------------------------
 
@@ -42,7 +37,7 @@ def parse_working_directory(config_file):
     # Parsing config XML file
     xml = minidom.parse(config_file)
     
-    # Retrieving assembler XML nodes
+    # Retrieving directories XML nodes
     directories = xml.getElementsByTagName('directories')
     
     for node in directories:
@@ -53,6 +48,20 @@ def parse_working_directory(config_file):
         return param_list[0].attributes['working-directory'].value
 
 """
+A function to parse working directory path.
+Returns one string.
+ElementTree version
+"""
+def parse_working_directory_ET(tree):
+
+    # Retrieving directory XML nodes
+    for node in tree.iter('directory'):
+        
+        # Finding directory node of working directory
+        if node.attrib.get('working-directory'): 
+            return node.attrib.get('working-directory')
+    
+"""
 A function to parse data directory path.
 Returns one string.
 """
@@ -61,7 +70,7 @@ def parse_data_directory(config_file):
     # Parsing config XML file
     xml = minidom.parse(config_file)
     
-    # Retrieving assembler XML nodes
+    # Retrieving directories XML nodes
     directories = xml.getElementsByTagName('directories')
     
     for node in directories:
@@ -71,19 +80,32 @@ def parse_data_directory(config_file):
 
         return param_list[1].attributes['in-file'].value
 
+"""
+A function to parse data directory path.
+Returns one string.
+ElementTree version
+"""
+def parse_data_directory_ET(tree):
+        
+    # Retrieving directory XML nodes
+    for node in tree.iter('directory'):
+        
+        # Finding directory node of working directory
+        if node.attrib.get('in-file'): 
+            return node.attrib.get('in-file')
+
 #   PREPROCESSING --------------------------------------------------------------
 
 """
 A function to parse data fastx_trimmer options
-Returns 2 char.
+Returns 1 char.
 """
 def parse_fastx_trimmed_option(config_file):
-    
     
     # Parsing config XML file
     xml = minidom.parse(config_file)
         
-    # Retrieving assembler XML nodes
+    # Retrieving preprocess XML nodes
     preprocess = xml.getElementsByTagName('preprocess')
     
     for node in preprocess:
@@ -91,12 +113,29 @@ def parse_fastx_trimmed_option(config_file):
         # Retrieving all parameters
         param_list = node.getElementsByTagName('parameter')
     
-        # TRINITY
+        # Fastx
         if node.getAttribute('name') == "fastx-trimmed":
             
             fastx_min_qual = param_list[0].attributes['min-quality'].value
 
     return fastx_min_qual
+    
+"""
+A function to parse data fastx_trimmer options
+Returns 1 char.
+ElementTree version
+"""
+def parse_fastx_trimmed_option_ET(tree):
+    
+    # Retrieving preprocess XML nodes
+    node = tree.find('./preprocesses/preprocess')
+    
+    # Retrieving all Fastx parameters
+    if node.attrib['name'] == 'fastx-trimmed':
+        for child in node.findall('./parameters/parameter'):
+            
+            if child.attrib.get('min-quality'):
+                return child.attrib.get('min-quality')
 
 #   ASSEMBLY -------------------------------------------------------------------
 
@@ -106,11 +145,11 @@ Returns two strings of reads files names.
 Current version only supports exactly two files.
 """
 def parse_reads_files_names(config_file):
-        
+
     # Parsing config XML file
     xml = minidom.parse(config_file)
     
-    # Retrieving assembler XML nodes
+    # Retrieving files XML nodes
     files = xml.getElementsByTagName('files')
     
     for node in files:
@@ -119,6 +158,25 @@ def parse_reads_files_names(config_file):
         param_list = node.getElementsByTagName('file')
 
         return param_list[0].attributes['left'].value, param_list[1].attributes['right'].value
+
+"""
+A function to parse reads files names.
+Returns two strings of reads files names.
+Current version only supports exactly two files.
+ElementTree version
+"""
+def parse_reads_files_names_ET(tree):
+    
+    # Retrieving files XML nodes
+    for node in tree.find('./assembly/files'):
+    
+        # Retrieving reads files names
+        if node.attrib.get('left'):
+            left = node.attrib.get('left')
+        if node.attrib.get('right'):
+            right = node.attrib.get('right')
+            
+    return left, right
 
 """
 A function to parse Trinity assembler parameters.
@@ -150,12 +208,48 @@ def parse_trinity_parameters(config_file):
             trinity_param["sslibtype"] = param_list[4].attributes['orientation'].value
             
     return trinity_param
+
+"""
+A function to parse Trinity assembler parameters.
+Returns a dictionnary of Trinity assembler parameters.
+ElementTree version
+"""
+def parse_trinity_parameters_ET(tree):
     
+    # Trinity parameters dictionnary
+    trinity_param = {}
     
+    # Optional parameters
+    trinity_param["cpu"] = "1"
+    trinity_param["output"] = ""
+    trinity_param["sslibtype"] = ""
+    
+    # Retrieving assembler XML nodes
+    node = tree.find('./assembly/assembler')
+    
+    # Retrieving all Trinity parameters
+    if node.attrib['name'] == 'trinity':
+        for child in node.findall('./parameters/parameter'):
+            
+            # Madatory parameters
+            if child.attrib.get('file-format'):
+                trinity_param["seqtype"] = child.attrib.get('file-format')
+            if child.attrib.get('max-ram'):
+                trinity_param["jm"] = child.attrib.get('max-ram')
+                
+            # Optional parameters
+            if child.attrib.get('max-cpu'):
+                trinity_param["cpu"] = child.attrib.get('max-cpu')
+            if child.attrib.get('output'):
+                trinity_param["output"] = child.attrib.get('output')
+            if child.attrib.get('orientation'):
+                trinity_param["sslibtype"] = child.attrib.get('orientation')
+                
+    return trinity_param
+
 """
 A function to parse Velvet/Oases assembler parameters
 Returns a dictionnary of Velvet/Oases assembler parameters.
-
 """
 def parse_vo_parameters(config_file):
     
@@ -199,4 +293,64 @@ def parse_vo_parameters(config_file):
                     vo_param["stepk"] = param_list[8].attributes['step-k'].value
                     vo_param["output"] = param_list[9].attributes['output'].value
                     
+    return vo_param
+
+"""
+A function to parse Velvet/Oases assembler parameters
+Returns a dictionnary of Velvet/Oases assembler parameters.
+ElementTree version
+"""
+def parse_vo_parameters_ET(tree):
+    
+    # Velvet/Oases parameters dictionnary
+    vo_param = {}
+    
+    # Optional parameter
+    vo_param["strandspecific"] = ""
+    vo_param["insertlength"] = ""
+    vo_param["nodecoverage"] = "" 
+    
+    # Retrieving all program nodes 
+    for node in tree.findall('./assembly/assembler/program'):
+    
+        # Retrieving all velveth parameters
+        if node.attrib['name'] == 'velveth':
+            for child in node.findall('./parameters/parameter'):
+                
+                # Mandatory parameters
+                if child.attrib.get('file-format'):
+                    vo_param["fileformat"] = child.attrib.get('file-format')
+                if child.attrib.get('read-type'):
+                    vo_param["readtype"] = child.attrib.get('read-type')
+                if child.attrib.get('file-layout'):
+                    vo_param["filelayout"] = child.attrib.get('file-layout')
+                
+                # Optional parameter
+                if child.attrib.get('orientation'):
+                    vo_param["strandspecific"] = child.attrib.get('orientation')
+                    
+        # Retrieving all oases parameters
+        if node.attrib['name'] == 'oases':
+            for child in node.findall('./parameters/parameter'):
+                
+                # Optional parameters
+                if child.attrib.get('insert-length'):
+                    vo_param["insertlength"] = child.attrib.get('insert-length')
+                if child.attrib.get('node-coverage'):
+                    vo_param["nodecoverage"] = child.attrib.get('node-coverage')
+                    
+        # Retrieving all oases_pipeline parameters
+        if node.attrib['name'] == 'oases-pipeline':
+            for child in node.findall('./parameters/parameter'):
+                
+                # Mandatory parameters
+                if child.attrib.get('min-k'):
+                    vo_param["mink"] = child.attrib.get('min-k')
+                if child.attrib.get('max-k'):
+                    vo_param["maxk"] = child.attrib.get('max-k')
+                if child.attrib.get('step-k'):
+                    vo_param["stepk"] = child.attrib.get('step-k')
+                if child.attrib.get('output'):
+                    vo_param["output"] = child.attrib.get('output')
+
     return vo_param
