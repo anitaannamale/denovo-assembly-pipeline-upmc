@@ -107,7 +107,7 @@ print "[" + str(round(time.time()-start_time)) + "sec] Parsing directories param
 
 """
 If you don't want to use ElementTree version of parsing functions, don't forget 
-to rewind config_file : 
+to rewind config_file each time you have used a parsing function : 
 
 config_file = open("config.xml","r")
 
@@ -136,9 +136,17 @@ print "[" + str(round(time.time()-start_time)) + "sec] Parsing assemblers parame
 # Reads files names
 reads_file_1, reads_file_2 = px.parse_reads_files_names_ET(tree)
 
+# Checking reads files names
+if not reads_file_1 or not reads_file_2:
+    sys.exit("ERROR : You must specifie reads files names in XML config file \
+              at assembly/files branch")
+
 # Adding path to reads files names
 reads_file_1 = data_directory + reads_file_1
 reads_file_2 = data_directory + reads_file_2
+
+# Trimmomatic parameters
+trimmomatic_params = px.parse_trimmomatic_option_ET(tree)
 
 # Trinity parameters
 trinity_params = px.parse_trinity_parameters_ET(tree)
@@ -155,10 +163,19 @@ r1 = open(reads_file_1,"r")
 r2 = open(reads_file_2,"r")
 
 # Reads Trimming
+"""
+Fastx version 
 fastx_min_qual = px.parse_fastx_trimmed_option_ET(tree)
-
 reads_file_1 = fastqmod.fastx_quality_filter(r1, fastx_min_qual)
 reads_file_2 = fastqmod.fastx_quality_filter(r2, fastx_min_qual)
+"""
+
+# Trimmomatic version
+paired_trimmo_1, paired_trimmo_2 = fastqmod.trimmomatic_trimming(r1,r2,trimmomatic_params)
+
+# Redifining reads files names 
+reads_file_1 = paired_trimmo_1
+reads_file_2 = paired_trimmo_2
 
 # Counting reads number
 r1_reads_number = fastqmod.readcount(r1)
@@ -228,7 +245,7 @@ vo_command_line = clg.generate_vo_command_line(reads_file_1, reads_file_2, vo_pa
 
 print "[" + str(round(time.time()-start_time)) + "sec] Launching assembly"
 
-cll.launch_command_line(trinity_command_line)
-cll.launch_command_line(vo_command_line)
+#~ cll.launch_command_line(trinity_command_line)
+#~ cll.launch_command_line(vo_command_line)
 
 print "[" + str(round(time.time()-start_time)) + "sec] END"

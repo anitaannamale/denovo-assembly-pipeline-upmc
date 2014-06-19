@@ -128,14 +128,64 @@ ElementTree version
 def parse_fastx_trimmed_option_ET(tree):
     
     # Retrieving preprocess XML nodes
-    node = tree.find('./preprocesses/preprocess')
+    for node in tree.findall('./preprocesses/preprocess'):
     
-    # Retrieving all Fastx parameters
-    if node.attrib['name'] == 'fastx-trimmed':
-        for child in node.findall('./parameters/parameter'):
-            
-            if child.attrib.get('min-quality'):
-                return child.attrib.get('min-quality')
+        # Retrieving all Fastx parameters
+        if node.attrib['name'] == 'fastx-trimmed':
+            for child in node.findall('./parameters/parameter'):
+                
+                if child.attrib.get('min-quality'):
+                    return child.attrib.get('min-quality')
+
+"""
+A function to parse Trimmomatic parameters from XML file
+ElementTree version
+"""
+def parse_trimmomatic_option_ET(tree):
+    
+    # Trinity parameters dictionnary
+    trimmomatic_param = {}
+    
+    # Optional parameters
+    trimmomatic_param["leading"] = "3"
+    trimmomatic_param["trailing"] = "3"
+    trimmomatic_param["sw-size"] = "4"
+    trimmomatic_param["sw-quality"] = "15"
+    trimmomatic_param["mi-length"] = ""
+    trimmomatic_param["mi-strictness"] = "0.5"
+
+    # Retrieving preprocess XML nodes
+    for node in tree.findall('./preprocesses/preprocess'):
+    
+        # Retrieving all Fastx parameters
+        if node.attrib['name'] == 'trimmomatic':
+            for child in node.findall('./parameters/parameter'):
+                
+                # Mandatory parameters
+                if child.attrib.get('trimmomatic-path'):
+                    trimmomatic_param["trimpath"] = child.attrib.get('trimmomatic-path')
+                if child.attrib.get('phred-encoding'):
+                    trimmomatic_param["phred"] = child.attrib.get('phred-encoding')
+                if child.attrib.get('min-read-length'):
+                    trimmomatic_param["minlen"] = child.attrib.get('min-read-length')
+                    
+                # Optional parameters
+                if child.attrib.get('threads-number'):
+                    trimmomatic_param["threads"] = child.attrib.get('threads-number')
+                if child.attrib.get('leading-quality-threshold'):
+                    trimmomatic_param["leading"] = child.attrib.get('leading-quality-threshold')
+                if child.attrib.get('trailing-quality-threshold'):
+                    trimmomatic_param["trailing"] = child.attrib.get('trailing-quality-threshold')
+                if child.attrib.get('sliding-window-size'):
+                    trimmomatic_param["sw-size"] = child.attrib.get('sliding-window-size')
+                if child.attrib.get('sliding-window-quality'):
+                    trimmomatic_param["sw-quality"] = child.attrib.get('sliding-window-quality')
+                if child.attrib.get('target-length'):
+                    trimmomatic_param["mi-length"] = child.attrib.get('target-length')
+                if child.attrib.get('target-strictness'):
+                    trimmomatic_param["mi-strictness"] = child.attrib.get('target-strictness')
+                
+    return trimmomatic_param
 
 #   ASSEMBLY -------------------------------------------------------------------
 
@@ -225,25 +275,25 @@ def parse_trinity_parameters_ET(tree):
     trinity_param["sslibtype"] = ""
     
     # Retrieving assembler XML nodes
-    node = tree.find('./assembly/assembler')
+    for node in tree.findall('./assembly/assembler'):
     
-    # Retrieving all Trinity parameters
-    if node.attrib['name'] == 'trinity':
-        for child in node.findall('./parameters/parameter'):
-            
-            # Madatory parameters
-            if child.attrib.get('file-format'):
-                trinity_param["seqtype"] = child.attrib.get('file-format')
-            if child.attrib.get('max-ram'):
-                trinity_param["jm"] = child.attrib.get('max-ram')
+        # Retrieving all Trinity parameters
+        if node.attrib['name'] == 'trinity':
+            for child in node.findall('./parameters/parameter'):
                 
-            # Optional parameters
-            if child.attrib.get('max-cpu'):
-                trinity_param["cpu"] = child.attrib.get('max-cpu')
-            if child.attrib.get('output'):
-                trinity_param["output"] = child.attrib.get('output')
-            if child.attrib.get('orientation'):
-                trinity_param["sslibtype"] = child.attrib.get('orientation')
+                # Madatory parameters
+                if child.attrib.get('file-format'):
+                    trinity_param["seqtype"] = child.attrib.get('file-format')
+                if child.attrib.get('max-ram'):
+                    trinity_param["jm"] = child.attrib.get('max-ram')
+                    
+                # Optional parameters
+                if child.attrib.get('max-cpu'):
+                    trinity_param["cpu"] = child.attrib.get('max-cpu')
+                if child.attrib.get('output'):
+                    trinity_param["output"] = child.attrib.get('output')
+                if child.attrib.get('orientation'):
+                    trinity_param["sslibtype"] = child.attrib.get('orientation')
                 
     return trinity_param
 

@@ -21,6 +21,37 @@
                 <parameter min-quality="28" />
             </parameters>
         </preprocess>
+        <!-- Fastx quality trimmer programm -->
+        <preprocess name="trimmomatic">
+            <parameters>
+                <!-- Path to trimmomatic.jar 
+                ex : /usr/share/java/trimmomatic.jar -->
+                <parameter trimmomatic-path="/usr/share/java/trimmomatic.jar" />
+                <!-- Maximum number of CPUs to be use -->
+                <parameter threads-number="8" />
+                <!-- Reads quality phred encoding version -->
+                <parameter phred-encoding="33" />
+                <!-- Removing low quality bases (below treshold value) from the 
+                5'end position -->
+                <parameter leading-quality-threshold="3" />
+                <!-- Removing low quality bases (below treshold value) from the 
+                3'end position -->
+                <parameter trailing-quality-threshold="3" />
+                <!-- Sliding window trimming within reads (window size) -->
+                <parameter sliding-window-size="4" />
+                <!-- Sliding window trimming within reads 
+                (window mean quality) -->
+                <parameter sliding-window-quality="15" />
+                <!-- Minimum read length required  -->
+                <parameter min-read-length="68" />
+                <!-- Performs an adaptive quality trim, balancing the benefits 
+                of retaining longer reads against the costs of retaining bases 
+                with errors.  0.1 < strictness < 0.9, low treshold favours 
+                longer reads while high treshold favours read correctness -->
+                <parameter target-length="40" />
+                <parameter target-strictness="0.5" />
+            </parameters>
+        </preprocess>
     </preprocesses>
     
     <!-- ASSEMBLY PARAMETERS -->
@@ -29,8 +60,8 @@
         
         <files>
             <!-- Reads file layout : 2 files -->
-            <file left="R1.fq" />
-            <file right="R2.fq" />
+            <file left="reads.ALL.left.fq" />
+            <file right="reads.ALL.right.fq" />
         </files>
         
         <assembler name="trinity">

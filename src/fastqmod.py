@@ -21,18 +21,6 @@ A Python module for simple FASTQ file analysis
 
 = FUNCTIONS
 
-readcount(file)
-ex : fastqmod.readcount(f)
-
-readslength(file)
-ex : fastqmod.readslength(f)
-
-percentgc(file)
-ex: fastqmod.percentgc(f)
-
-decodereadquality(file)
-ex : fastqmod.decodereadquality(f)
-
 with :
 f = open("filename.fastq","r")
 
@@ -203,7 +191,7 @@ A function to trim bad quality reads
 TO USE THIS FUNCTION FASTX TOOLKIT HAS TO BE INSTALLED !
 WEB : http://hannonlab.cshl.edu/fastx_toolkit/index.html
 inputs : opened reads file (f) / minimum quality of bases within reads sequences
-returns the name of the output file generated   
+returns the names of the output files generated   
 """
 def fastx_quality_filter(f, min_qual):
     
@@ -235,8 +223,86 @@ def fastx_quality_filter(f, min_qual):
             if p.returncode == 0:
                 pass
             
-        except CalledProcessError as e:
+        except subprocess.CalledProcessError as e:
             print (e.returncode)
     
     return output_filename
+
+"""
+A function to trim bad quality reads
+TO USE THIS FUNCTION TRIMMOMATIC HAS TO BE INSTALLED !
+WEB : http://www.usadellab.org/cms/?page=trimmomatic
+inputs : opened reads file (f) / trimmomatic parameters dictionnary
+returns the names of the output files generated   
+
+Trimmomatic parameters dictionnary format : 
+
+{'phred': '33', 
+ 'sw-size': '4', 
+ 'minlen': '40', 
+ 'sw-quality': '15', 
+ 'leading': '3', 
+ 'mi-strictness': '0.5', 
+ 'trailing': '3', 
+ 'mi-length': '40',
+ 'threads': '8',
+ 'trimpath': '/usr/share/java/trimmomatic.jar'}
+
+sw : sliding window
+mi : maxinfo
+
+"""
+def trimmomatic_trimming(reads_filename_1, reads_filename_2, trim_params_dic):
+    
+    # Formating input & output files names 
+    input1 = reads_filename_1.name
+    input2 = reads_filename_2.name
+    
+    filename1, file_extention1 = os.path.splitext(input1)
+    filename2, file_extention2 = os.path.splitext(input2)
+    
+    output_paired_1 = filename1 + ".paired" + file_extention1
+    output_paired_2 = filename2 + ".paired" + file_extention2
+    
+    output_unpaired_1 = filename1 + ".unpaired" + file_extention1
+    output_unpaired_2 = filename2 + ".unpaired" + file_extention2
+    
+    # Formating options
+    phred_option            = "-phred" + trim_params_dic['phred']
+    leading_option          = "LEADING:" + trim_params_dic['leading']
+    trailing_option         = "TRAILING:" + trim_params_dic['trailing']
+    slidingwindow_option    = "SLIDINGWINDOW:" + \
+                            trim_params_dic['sw-size'] + \
+                            ":" + \
+                            trim_params_dic['sw-quality']
+    maxinfo_option          = "MAXINFO:" + \
+                            trim_params_dic['mi-length'] + \
+                            ":" + \
+                            trim_params_dic['mi-strictness']
+    minlen_option           = "MINLEN:" + trim_params_dic['minlen']
+    
+    args = ['java',
+            '-jar',
+            trim_params_dic['trimpath'],
+            'PE',
+            '-threads',
+            trim_params_dic['threads'],
+            phred_option,
+            input1,
+            input2,
+            output_paired_1,
+            output_unpaired_1,
+            output_paired_2,
+            output_unpaired_2,
+            leading_option,
+            trailing_option,
+            slidingwindow_option,
+            maxinfo_option,
+            minlen_option]
+    
+    # Launching command line
+    command_line = ' '.join(args)
+    os.system(command_line + "> ./trimmomatic.log 2>&1")
+    
+    return output_paired_1, output_paired_2
 

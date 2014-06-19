@@ -26,7 +26,7 @@ upmc-denovo-assembly-pipeline uses a number of open source projects to work prop
 
 Installs
 --------------
-### Python 3.0 
+### Python 2.7 & 3.0 
 
 Installed via Synaptic
 

@@ -19,12 +19,6 @@ A Python module to generate command lines for several programs
 
 06/2014
 
-= FUNCTION
-
-generate_trinity_command_line(readsfile1,readsfile2,param_dictionnary)
-generate_vo_command_line(readsfile1,readsfile2,param_dictionnary)
-
-
 """
 
 #   IMPORTS --------------------------------------------------------------------
