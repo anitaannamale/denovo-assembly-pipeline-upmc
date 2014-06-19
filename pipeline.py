@@ -173,21 +173,21 @@ reads_file_2 = fastqmod.fastx_quality_filter(r2, fastx_min_qual)
 # Trimmomatic version
 paired_trimmo_1, paired_trimmo_2 = fastqmod.trimmomatic_trimming(r1,r2,trimmomatic_params)
 
-# Redifining reads files names 
-reads_file_1 = paired_trimmo_1
-reads_file_2 = paired_trimmo_2
-
-# Counting reads number
-r1_reads_number = fastqmod.readcount(r1)
-r2_reads_number = fastqmod.readcount(r2)
-
 # Closing no trimmed reads files
 r1.close()
 r2.close()
 
+# Redifining reads files names 
+reads_file_1 = paired_trimmo_1
+reads_file_2 = paired_trimmo_2
+
 # Loading trimmed reads files
 r1 = open(reads_file_1,"r")
 r2 = open(reads_file_2,"r")
+
+# Counting reads number
+r1_reads_number = fastqmod.readcount(r1)
+r2_reads_number = fastqmod.readcount(r2)
 
 # Summary option 
 summary_option = args.datasummary
@@ -245,7 +245,7 @@ vo_command_line = clg.generate_vo_command_line(reads_file_1, reads_file_2, vo_pa
 
 print "[" + str(round(time.time()-start_time)) + "sec] Launching assembly"
 
-#~ cll.launch_command_line(trinity_command_line)
-#~ cll.launch_command_line(vo_command_line)
+cll.launch_command_line(trinity_command_line)
+cll.launch_command_line(vo_command_line)
 
 print "[" + str(round(time.time()-start_time)) + "sec] END"
