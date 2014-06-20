@@ -94,4 +94,6 @@ def expected_vo_ram(r1_reads_number, r2_reads_number):
 Predict the amount of RAM needed for both Trinity and VO assemblies
 """
 def expected_both_assembler_ram(r1_reads_number, r2_reads_number):
-    return ((int(r1_reads_number) + int(r2_reads_number)) / 1000000) * 3
+    trinity_ram = expected_trinity_ram(r1_reads_number, r2_reads_number) 
+    vo_ram = expected_vo_ram(r1_reads_number, r2_reads_number) 
+    return trinity_ram + vo_ram

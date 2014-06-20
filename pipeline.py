@@ -245,7 +245,7 @@ vo_command_line = clg.generate_vo_command_line(reads_file_1, reads_file_2, vo_pa
 
 print "[" + str(round(time.time()-start_time)) + "sec] Launching assembly"
 
-cll.launch_command_line(trinity_command_line)
-cll.launch_command_line(vo_command_line)
+#~ cll.launch_command_line(trinity_command_line)
+#~ cll.launch_command_line(vo_command_line)
 
 print "[" + str(round(time.time()-start_time)) + "sec] END"
