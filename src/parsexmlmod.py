@@ -254,8 +254,7 @@ def parse_trinity_parameters(config_file):
             trinity_param["seqtype"] = param_list[0].attributes['file-format'].value
             trinity_param["jm"] = param_list[1].attributes['max-ram'].value
             trinity_param["cpu"] = param_list[2].attributes['max-cpu'].value
-            trinity_param["output"] = param_list[3].attributes['output'].value
-            trinity_param["sslibtype"] = param_list[4].attributes['orientation'].value
+            trinity_param["sslibtype"] = param_list[3].attributes['orientation'].value
             
     return trinity_param
 
@@ -271,7 +270,6 @@ def parse_trinity_parameters_ET(tree):
     
     # Optional parameters
     trinity_param["cpu"] = "1"
-    trinity_param["output"] = ""
     trinity_param["sslibtype"] = ""
     
     # Retrieving assembler XML nodes
@@ -290,8 +288,6 @@ def parse_trinity_parameters_ET(tree):
                 # Optional parameters
                 if child.attrib.get('max-cpu'):
                     trinity_param["cpu"] = child.attrib.get('max-cpu')
-                if child.attrib.get('output'):
-                    trinity_param["output"] = child.attrib.get('output')
                 if child.attrib.get('orientation'):
                     trinity_param["sslibtype"] = child.attrib.get('orientation')
                 
@@ -341,7 +337,6 @@ def parse_vo_parameters(config_file):
                     vo_param["mink"] = param_list[6].attributes['min-k'].value
                     vo_param["maxk"] = param_list[7].attributes['max-k'].value
                     vo_param["stepk"] = param_list[8].attributes['step-k'].value
-                    vo_param["output"] = param_list[9].attributes['output'].value
                     
     return vo_param
 
@@ -400,7 +395,25 @@ def parse_vo_parameters_ET(tree):
                     vo_param["maxk"] = child.attrib.get('max-k')
                 if child.attrib.get('step-k'):
                     vo_param["stepk"] = child.attrib.get('step-k')
-                if child.attrib.get('output'):
-                    vo_param["output"] = child.attrib.get('output')
 
     return vo_param
+
+#   MAPPING --------------------------------------------------------------------
+
+"""
+A function to parse mapping parameters (generateBAM.py).
+ElementTree version
+"""
+def parse_mapping_parameters_ET(tree):
+    
+    # Mapping parameters dictionnary
+    mapping_param = {}
+
+   # Retrieving all program nodes 
+    for node in tree.findall('./mapping/parameters/parameter'):
+    
+        # Retrieving all generateBAM.py parameters
+        if node.attrib.get('mapping-program'):
+            mapping_param["mapper"] = node.attrib.get('mapping-program')
+            
+    return mapping_param

@@ -27,6 +27,7 @@ A Python module to launch command lines
 
 import shlex, subprocess
 import time,sys
+import re
 
 #   FUNCTIONS ------------------------------------------------------------------
 
@@ -52,6 +53,9 @@ def launch_command_line(command_line):
     elif args[0] == "oases_pipeline.py":
         stdout_name = "stdout_vo.txt"
         stderr_name = "stderr_vo.txt"
+    elif re.match(".*\/generateBAM.py$" ,args[0]) is not None:
+        stdout_name = "stdout_bam_generation.txt"
+        stderr_name = "stderr_bam_generation.txt"
     else:
         stdout_name = "stdout.txt"
         stderr_name = "stderr.txt"

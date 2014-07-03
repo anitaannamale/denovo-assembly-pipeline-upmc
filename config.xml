@@ -28,7 +28,7 @@
                 ex : /usr/share/java/trimmomatic.jar -->
                 <parameter trimmomatic-path="/usr/share/java/trimmomatic.jar" />
                 <!-- Maximum number of CPUs to be use -->
-                <parameter threads-number="8" />
+                <parameter threads-number="4" />
                 <!-- Reads quality phred encoding version -->
                 <parameter phred-encoding="33" />
                 <!-- Removing low quality bases (below treshold value) from the 
@@ -43,13 +43,13 @@
                 (window mean quality) -->
                 <parameter sliding-window-quality="15" />
                 <!-- Minimum read length required  -->
-                <parameter min-read-length="68" />
+                <parameter min-read-length="100" />
                 <!-- Performs an adaptive quality trim, balancing the benefits 
                 of retaining longer reads against the costs of retaining bases 
                 with errors.  0.1 < strictness < 0.9, low treshold favours 
                 longer reads while high treshold favours read correctness -->
-                <parameter target-length="40" />
-                <parameter target-strictness="0.5" />
+                <parameter target-length="100" />
+                <parameter target-strictness="0.3" />
             </parameters>
         </preprocess>
     </preprocesses>
@@ -60,8 +60,8 @@
         
         <files>
             <!-- Reads file layout : 2 files -->
-            <file left="reads.ALL.left.fq" />
-            <file right="reads.ALL.right.fq" />
+            <file left="2013_0267_TruSeq_CGATGT_L002_R1_001.fastq" />
+            <file right="2013_0267_TruSeq_CGATGT_L002_R2_001.fastq" />
         </files>
         
         <assembler name="trinity">
@@ -69,13 +69,11 @@
                 <!-- Reads file format : "fq" "fa" -->
                 <parameter file-format="fq" />
                 <!-- Maximum RAM allowed (Jellyfish) -->
-                <parameter max-ram="15" />
+                <parameter max-ram="30" />
                 <!-- Maximum CPU allowed (Chrysalis/Butterfly) -->
-                <parameter max-cpu="10" />
-                <!-- Output directory name -->
-                <parameter output="TRINOUT" />
+                <parameter max-cpu="4" />
                 <!-- Reads orientation : "RF" "FR" "R" "F" -->
-                <parameter orientation="RF" />
+                <parameter orientation="" />
             </parameters>
         </assembler>
         <assembler name="velvet-oases">
@@ -95,7 +93,7 @@
             <program name="oases">
                 <parameters>
                     <!-- Paired reads insert length -->
-                    <parameter insert-length="200" />
+                    <parameter insert-length="" />
                     <!-- Minimum node coverage allowed (reads)-->
                     <parameter node-coverage="3" />
                 </parameters>
@@ -107,14 +105,23 @@
                     <!-- End K value for k-mer -->
                     <parameter max-k="31" />
                     <!-- Step between K value for k-mer -->
-                    <parameter step-k="2" />
-                    <!-- Output directory name -->
-                    <parameter output="OASOUT" />
+                    <parameter step-k="4" />
                 </parameters>
             </program>
         </assembler>
         
     </assembly>
     
+    <!-- MAPPING PARAMETERS -->
+    
+    <mapping>
+        <parameters>
+            <!-- Mapping programm to use :
+            "bwaaln" or
+            "bwamem" or
+            "bowtie" -->
+            <parameter mapping-program="bwaaln" />
+        </parameters>
+    </mapping>
     
 </configuration>

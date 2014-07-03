@@ -39,6 +39,11 @@ import commandlinegeneratormod as clg
 import computerressourcesmod as cr
 import commandlinelauncher as cll
 
+#   DEFINITIONS ----------------------------------------------------------------
+
+# Defining the /utils/ path, edit if needed
+utils_dir = "/home/meng/Pipeline/utils"
+
 #   FUNCTION -------------------------------------------------------------------
 
 '''
@@ -154,6 +159,9 @@ trinity_params = px.parse_trinity_parameters_ET(tree)
 # Velvet/Oases parameters
 vo_params = px.parse_vo_parameters_ET(tree)
 
+# Mapping parameters
+mapping_params = px.parse_mapping_parameters_ET(tree)
+
 #   PREPROCESSING READS FILES --------------------------------------------------
 
 print "[" + str(round(time.time()-start_time)) + "sec] Preprocessing reads files"
@@ -177,7 +185,7 @@ paired_trimmo_1, paired_trimmo_2 = fastqmod.trimmomatic_trimming(r1,r2,trimmomat
 r1.close()
 r2.close()
 
-# Redifining reads files names 
+# Re-assignment reads files names 
 reads_file_1 = paired_trimmo_1
 reads_file_2 = paired_trimmo_2
 
@@ -236,11 +244,29 @@ r2.close()
 print "[" + str(round(time.time()-start_time)) + "sec] Generating command lines"
 
 # Trinity 
-trinity_command_line = clg.generate_trinity_command_line(reads_file_1, reads_file_2, trinity_params)
+trinity_command_line = clg.generate_trinity_command_line(reads_file_1, 
+                                                         reads_file_2, 
+                                                         trinity_params)
 
 # Velvet/Oases
-vo_command_line = clg.generate_vo_command_line(reads_file_1, reads_file_2, vo_params)
+vo_command_line = clg.generate_vo_command_line(reads_file_1, 
+                                               reads_file_2, 
+                                               vo_params)
 
+# generateBAM.py
+mapping_command_line_trinity = clg.generate_mapping_command_line(reads_file_1, 
+                                                                 reads_file_2, 
+                                                                 mapping_params,
+                                                                 utils_dir,
+                                                                 working_directory,
+                                                                 "trinity")
+
+mapping_command_line_vo = clg.generate_mapping_command_line(reads_file_1, 
+                                                            reads_file_2, 
+                                                            mapping_params,
+                                                            utils_dir,
+                                                            working_directory,
+                                                            "vo")
 
 #   LAUNCHING ASSEMBLY ---------------------------------------------------------
 
@@ -248,5 +274,14 @@ print "[" + str(round(time.time()-start_time)) + "sec] Launching assembly"
 
 cll.launch_command_line(trinity_command_line)
 cll.launch_command_line(vo_command_line)
+
+#   MAPPING PROCESS ------------------------------------------------------------
+
+print "[" + str(round(time.time()-start_time)) + "sec] Processing mapping"
+
+cll.launch_command_line(mapping_command_line_trinity)
+cll.launch_command_line(mapping_command_line_vo)
+
+#   END ------------------------------------------------------------------------
 
 print "[" + str(round(time.time()-start_time)) + "sec] END"

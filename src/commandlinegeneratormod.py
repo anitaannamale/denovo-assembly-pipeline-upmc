@@ -23,10 +23,9 @@ A Python module to generate command lines for several programs
 
 #   IMPORTS --------------------------------------------------------------------
 
-import sys
+import sys, os
 
 #   FUNCTIONS ------------------------------------------------------------------
-
 
 """
 A function to check if mandatory parameter is filled.
@@ -51,6 +50,7 @@ def generate_trinity_command_line(readsfile1, readsfile2, paramsdic):
     
     # Declaration
     command_line = "Trinity.pl"
+    output_par   = "--output TRINOUT"
     
     # Formating required parameters 
     seqtype_par        = "--seqType "     + paramsdic["seqtype"]
@@ -61,16 +61,12 @@ def generate_trinity_command_line(readsfile1, readsfile2, paramsdic):
     # Formating optional parameters
     sslibtype_par = ""
     cpu_par = ""
-    output_par = ""
     
     if paramsdic["sslibtype"]:
         sslibtype_par = "--SS_lib_type " + paramsdic["sslibtype"]
     
     if paramsdic["cpu"]:
         cpu_par = "--CPU " + paramsdic["cpu"]
-    
-    if paramsdic["output"]: 
-        output_par = "--output " + paramsdic["output"]
     
     # Formating complete command line
     command_line = ("%s %s %s %s %s %s %s %s")%(command_line,
@@ -83,9 +79,6 @@ def generate_trinity_command_line(readsfile1, readsfile2, paramsdic):
                                                 output_par)
         
     return command_line
-
-
-#   TRINITY --------------------------------------------------------------------
 
 """
 A function to generate Velvet/Oases assembler command line.
@@ -140,7 +133,7 @@ def generate_vo_command_line(readsfile1, readsfile2, paramsdic):
     kmin_par               = "-m "     + paramsdic["mink"]
     kmax_par               = "-M "     + paramsdic["maxk"]
     step_par               = "-s "     + paramsdic["stepk"]
-    output_par             = "-o "     + paramsdic["output"]
+    output_par             = "-o "     + "VOOUT"
     clean_par              = "-c"
     
     command_line = command_line + (" %s %s %s %s %s %s %s")%(kmin_par,
@@ -152,3 +145,39 @@ def generate_vo_command_line(readsfile1, readsfile2, paramsdic):
                                                              clean_par)
     
     return command_line
+
+"""
+A function to generate generateBAM.py command line.
+"""
+def generate_mapping_command_line(readsfile1, readsfile2, paramsdic, utils_dir, working_dir, assembly):
+    
+    # Checking mandatory parameters
+    check_parameter_not_blank(paramsdic,"mapper")
+
+    if not readsfile1 or not readsfile2:
+        sys.exit("ERROR : You must specify reads files names !")
+    
+    # Declaration
+    command_line = utils_dir + "/" + "generateBAM.py"
+
+    # Current directory 
+    current_dir = os.getcwd()
+
+    # Formating mapping parameters
+    mapping_program_par = paramsdic["mapper"]
+    
+    if assembly == "trinity":
+        assembly_file_par = working_dir + "TRINOUT/Trinity.fasta"
+        output_prefix = "Trinity"
+    elif assembly == "vo":
+        assembly_file_par = working_dir + "VOOUTMerged/transcripts.fa"
+        output_prefix = "VO"
+    
+    command_line = command_line + (" %s %s %s %s %s")%(assembly_file_par,
+                                                       readsfile1,
+                                                       readsfile2,
+                                                       mapping_program_par,
+                                                       output_prefix) 
+
+    return command_line
+
