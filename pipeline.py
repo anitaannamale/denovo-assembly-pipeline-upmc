@@ -27,6 +27,7 @@ import os, sys
 import datetime
 import time
 import argparse
+import shutil
 from xml.etree.ElementTree import ElementTree
 
 # Add /src/ directory to Python path | Edit if needed
@@ -85,11 +86,13 @@ parser=argparse.ArgumentParser(
     description='''A Python utility to proceed de novo transcriptomic assembly and analysis.''',
     epilog="""Arnaud MENG""")
 
-parser.add_argument('--datasummary', 
-                    type=str, 
-                    action='store', 
-                    default="no", 
+parser.add_argument('--summary', 
+                    action='store_true', 
                     help='Generate "summary.txt" : basics informations of reads files')  
+                    
+parser.add_argument('--clean', 
+                    action='store_true', 
+                    help='Keeps only assemblies files at the end of the assembly steps')  
 
 args=parser.parse_args()
 
@@ -198,10 +201,13 @@ r1_reads_number = fastqmod.readcount(r1)
 r2_reads_number = fastqmod.readcount(r2)
 
 # Summary option 
-summary_option = args.datasummary
-if summary_option == "yes":    
+if args.summary:    
     print "[" + str(round(time.time()-start_time)) + "sec] Summaring"
-    generate_summary(r1, r2, r1_reads_number, r2_reads_number)
+    
+    try:
+        generate_summary(r1, r2, r1_reads_number, r2_reads_number)
+    except Exception, err:
+        sys.exit('ERROR : Division by 0 forbiden / May be due to empty paired files after trimming step')
     
 # Closing XML configuration files
 config_file.close()    
@@ -274,6 +280,25 @@ print "[" + str(round(time.time()-start_time)) + "sec] Launching assembly"
 
 cll.launch_command_line(trinity_command_line)
 cll.launch_command_line(vo_command_line)
+
+if args.clean:
+    
+    try:
+        
+        # Moving assembly files to working directory 
+        os.rename(working_directory + 'TRINOUT/Trinity.fasta', 
+                  working_directory + 'trinity_transcripts.fa')
+        os.rename(working_directory + 'VOOUTMerged/transcripts.fa', 
+                  working_directory + 'vo_transcripts.fa')
+                  
+        # Erasing all Trinity and Velvet/Oases directories
+        shutil.rmtree(working_directory + 'TRINOUT')
+        shutil.rmtree(working_directory + 'VOOUTMerged')
+        os.system("rm -rf VOOUT*")
+                  
+    except Exception, err:
+        
+        sys.exit('ERROR : Assembly file does not exist / Be sure that Trinity and Velvet/Oases processes ended')
 
 #   MAPPING PROCESS ------------------------------------------------------------
 

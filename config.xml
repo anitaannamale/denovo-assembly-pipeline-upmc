@@ -6,7 +6,7 @@
     
     <directories>
         <!-- Path to directory to work into -->
-        <directory working-directory="/home/meng/Pipeline_1/my_working_dir/" />
+        <directory working-directory="/home/meng/Pipeline_1/my_working_dir_2/" />
         <!-- Path to directory where reads files are stored -->
         <directory in-file="/home/meng/Pipeline_1/data/" />
     </directories>
@@ -60,8 +60,8 @@
         
         <files>
             <!-- Reads file layout : 2 files -->
-            <file left="2013_0267_TruSeq_CGATGT_L002_R1_001.fastq" />
-            <file right="2013_0267_TruSeq_CGATGT_L002_R2_001.fastq" />
+            <file left="R1.fq" />
+            <file right="R2.fq" />
         </files>
         
         <assembler name="trinity">
